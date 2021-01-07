@@ -37,16 +37,28 @@ class Message
         ];
     }
     public function SendMessage($text){
+        $replyMarkup = array(
+            'keyboard' => array(
+                array("درخواست توییت", "پیشنهاد توییت ")
+            ),
+            'resize_keyboard'=>True,
+        );
+        $encodedMarkup = json_encode($replyMarkup);
         $this->api('sendMessage',[
             'chat_id'=>$this->chat_id,
             'text'=>$text,
+            'reply_markup'=>$encodedMarkup,
             'parse_mode'=>'MarkDown']);
     }
     private function commands($cmd){
         switch ($cmd) {
             case "/start":
-              $this->SendMessage(User::CheckUser($this->user()));
+                if (User::CheckUser($this->user()))
+                    $this->SendMessage($this->user()['first_name'].' عزیز  '.PHP_EOL.' شما قبلا ثبت نام کرده اید نیاز به ثبت نام مجدد نمیباشد ');
+                else
+                    $this->SendMessage(User::save($this->user()));
                 break;
+
         }
     }
 
