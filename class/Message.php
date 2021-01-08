@@ -59,6 +59,10 @@ class Message
                     $this->SendMessage(User::save($this->user()));
                 break;
 
+            case "درخواست توییت":
+                $this->SendMessage($this->message->message_id);
+                break;
+
         }
     }
 
