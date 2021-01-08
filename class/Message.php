@@ -37,17 +37,10 @@ class Message
         ];
     }
     public function SendMessage($text){
-        $replyMarkup = array(
-            'keyboard' => array(
-                array("درخواست توییت", "پیشنهاد توییت ")
-            ),
-            'resize_keyboard'=>True,
-        );
-        $encodedMarkup = json_encode($replyMarkup);
         $this->api('sendMessage',[
             'chat_id'=>$this->chat_id,
             'text'=>$text,
-            'reply_markup'=>$encodedMarkup,
+            'reply_markup'=>Keyboard::UserKeyboard($this->user()['id']),
             'parse_mode'=>'MarkDown']);
     }
     private function commands($cmd){
@@ -59,8 +52,12 @@ class Message
                     $this->SendMessage(User::save($this->user()));
                 break;
 
-            case "درخواست توییت":
-                $this->SendMessage($this->message->message_id);
+            case "درخواست توییت جدید":
+                $this->SendMessage($this->chat_id);
+                break;
+
+            case "ثبت توییت":
+
                 break;
 
         }
