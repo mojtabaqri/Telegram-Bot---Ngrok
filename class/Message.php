@@ -36,11 +36,13 @@ class Message
           'is_bot'=>$user->is_bot,
         ];
     }
-    public function SendMessage($text){
+    public function SendMessage($text,$reply=null){
+        if ($reply==null)
+            Keyboard::UserKeyboard($this->user()['id']);
         $this->api('sendMessage',[
             'chat_id'=>$this->chat_id,
             'text'=>$text,
-            'reply_markup'=>Keyboard::UserKeyboard($this->user()['id']),
+            'reply_markup'=>$reply,
             'parse_mode'=>'MarkDown']);
     }
     private function commands($cmd){
@@ -53,11 +55,12 @@ class Message
                 break;
 
             case "درخواست توییت جدید":
-                $this->SendMessage($this->chat_id);
+
                 break;
 
             case "ثبت توییت":
-
+                if (Admin::checkAdmin($this->user()['id']))
+                    Twit::saveTwit('asda','#2sample');
                 break;
 
         }

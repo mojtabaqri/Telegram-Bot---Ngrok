@@ -26,6 +26,17 @@ class Keyboard
 
     }
 
+    public static function HashtagKeyboard($data=[])
+    {
+        $replyMarkup = array(
+            'keyboard' => array(
+                array("درخواست توییت جدید")
+            ),
+            'resize_keyboard'=>True,
+
+        );
+    }
+
 
 
 
