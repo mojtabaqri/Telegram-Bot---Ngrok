@@ -2,6 +2,7 @@
     "require": {
         "vlucas/phpdotenv": "^5.2",
         "rakibtg/sleekdb": "^1.5",
-      "ext-json": "*"
+      "ext-json": "*",
+      "ext-curl": "*"
     }
 }

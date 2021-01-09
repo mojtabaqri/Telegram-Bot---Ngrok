@@ -10,8 +10,6 @@ class User
      $this->user=$user;
     }
 
-
-
     public function getUser()
     {
         return $this->user;

@@ -1,10 +1,17 @@
 <?php
-require 'Loader.php';
 class Message
 {
     private $update_id;
     private $message;
     private $chat_id;
+
+    /**
+     * @return mixed
+     */
+    public function getChatId()
+    {
+        return $this->chat_id;
+    }
     public function __construct($telegram_update)
     {
         $telegram_update=json_decode($telegram_update);
@@ -38,7 +45,7 @@ class Message
     }
     public function SendMessage($text,$reply=null){
         if ($reply==null)
-            Keyboard::UserKeyboard($this->user()['id']);
+            $reply=Keyboard::UserKeyboard($this->user()['id']);
         $this->api('sendMessage',[
             'chat_id'=>$this->chat_id,
             'text'=>$text,
@@ -46,28 +53,34 @@ class Message
             'parse_mode'=>'MarkDown']);
     }
     private function commands($cmd){
-        switch ($cmd) {
-            case "/start":
-                if (User::CheckUser($this->user()))
-                    $this->SendMessage($this->user()['first_name'].' عزیز  '.PHP_EOL.' شما قبلا ثبت نام کرده اید نیاز به ثبت نام مجدد نمیباشد ');
-                else
-                    $this->SendMessage(User::save($this->user()));
-                break;
+        if(strpos($cmd,'#')===0){
+           $this->SendMessage(Twit::userRequestTwit($this->user()['id'],$cmd));
+          return false;
+      }
+            switch ($cmd) {
+                case "/start":
+                    if (User::CheckUser($this->user()))
+                        $this->SendMessage($this->user()['first_name'] . ' عزیز  ' . PHP_EOL . ' شما قبلا ثبت نام کرده اید نیاز به ثبت نام مجدد نمیباشد ');
+                    else
+                        $this->SendMessage(User::save($this->user()));
+                    break;
 
-            case "درخواست توییت جدید":
-                break;
+                case "درخواست توییت جدید":
+                    $this->SendMessage('هشتگ مورد نظر را انتخاب کنید!', Keyboard::HashtagKeyboard());
+                    break;
 
-            case "ثبت توییت":
-                if (Admin::checkAdmin($this->user()['id']))
-                    $this->SendMessage('این قسمت در دست تکمیل است!');
-                break;
+                case "ثبت توییت":
+                    if (Admin::checkAdmin($this->user()['id']))
+                        $this->SendMessage('این قسمت در دست تکمیل است!');
+                    break;
 
-            case 'انتخاب هشتگ':
-                 $this->SendMessage('هشتگ مورد نظر را انتخاب کنید!',Keyboard::HashtagKeyboard());
-                break;
-
+                default:
+                    $this->SendMessage('دستور ناشناخته بود !');
+                    break;
+            }
         }
-    }
+
+
 
 
 
