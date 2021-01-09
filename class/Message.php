@@ -55,12 +55,15 @@ class Message
                 break;
 
             case "درخواست توییت جدید":
-
                 break;
 
             case "ثبت توییت":
                 if (Admin::checkAdmin($this->user()['id']))
-                    Twit::saveTwit('asda','#2sample');
+                    $this->SendMessage('این قسمت در دست تکمیل است!');
+                break;
+
+            case 'انتخاب هشتگ':
+                 $this->SendMessage('هشتگ مورد نظر را انتخاب کنید!',Keyboard::HashtagKeyboard());
                 break;
 
         }

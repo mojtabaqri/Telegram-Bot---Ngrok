@@ -26,16 +26,18 @@ class Keyboard
 
     }
 
-    public static function HashtagKeyboard($data=[])
-    {
+    public static function HashtagKeyboard(){
         $replyMarkup = array(
             'keyboard' => array(
-                array("درخواست توییت جدید")
+                array_filter(array_column(Hashtag::getHashtags(), 'hashtag'))
             ),
             'resize_keyboard'=>True,
-
         );
+        return $encodedMarkup = json_encode($replyMarkup);
+
     }
+
+
 
 
 
