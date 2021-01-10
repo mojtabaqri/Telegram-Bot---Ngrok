@@ -7,4 +7,3 @@ spl_autoload_register(function ($classname){
 });
 $bot=new Message(file_get_contents('php://input'));
 $user=new User($bot->user());
-var_dump(Twit::userRequestTwit(1109436541,'#sample'));

@@ -9,11 +9,12 @@ class Twit
     private static function checkUserRequestTwit($id,$hashtag)
     {
 
-     return   $database = SleekDB::store('userTwit', $_ENV['dataDir'])->fetch();
+      $database = SleekDB::store('userTwit', $_ENV['dataDir']);
         try {
+           if(!$database->where('chat_id', '=', $id)->where('hashtag','=',$hashtag)->fetch())
+           return False;
+               return True;
 
-            if ($database->where('chat_id', '=', $id)->where('hashtag','=',$hashtag)->fetch())
-                return $database;
         } catch (Exception $e) {
         }
 
@@ -24,22 +25,19 @@ class Twit
     public static function userRequestTwit($id,$hashtag)
     {
 
-        return self::checkUserRequestTwit($id,$hashtag);
+       if(self::checkUserRequestTwit($id,$hashtag))
+        return 'شما قبلا یک توییت با این هشتگ دریافت کرده اید! هر توییت برای یک نفر می باشد !' ;
         $database = SleekDB::store('userTwit', $_ENV['dataDir']);
         try {
             $data=[
                 'chat_id'=>$id,
                 'hashtag'=>$hashtag
             ];
-            $database->insert($data);
-            //return self::getTwit($hashtag);
+           $database->insert($data);
+           return self::getTwit($hashtag);
         } catch (Exception $e) {
 
         }
-
-
-
-
     }
 
     public static function saveTwit($twit,$hashTag){
@@ -64,12 +62,14 @@ class Twit
     {
         try {
             $database = SleekDB::store('twit', $_ENV['dataDir']);
-         return $database->where('hashtag','=',$hashtag)->where('invoke','=',false)->fetch();
-
+            $database->where('hashtag','=',$hashtag)->where('invoke','=',false)->limit(1);
+            $database->update(['invoke'=>true]);
+            return $database->fetch();
         } catch (Exception $e) {
 
         }
     }
+
 
 
 
