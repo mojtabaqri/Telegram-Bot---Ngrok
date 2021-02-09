@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b40576ae-19ac-4fa4-b127-f43841c34ba2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/Message.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/Message.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/class/Twit.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/Twit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -70,8 +70,18 @@
       <workItem from="1609923501700" duration="7181000" />
       <workItem from="1610004634050" duration="8239000" />
       <workItem from="1610082932551" duration="30911000" />
-      <workItem from="1610264731755" duration="6693000" />
+      <workItem from="1610264731755" duration="7314000" />
+      <workItem from="1610376765151" duration="2147000" />
+      <workItem from="1610990959697" duration="15000" />
     </task>
+    <task id="LOCAL-00001" summary="Twit Class fixed">
+      <created>1610279897089</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1610279897089</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -89,5 +99,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Twit Class fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Twit Class fixed" />
   </component>
 </project>

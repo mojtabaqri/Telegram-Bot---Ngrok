@@ -54,7 +54,13 @@ class Message
     }
     private function commands($cmd){
         if(strpos($cmd,'#')===0){
-           $this->SendMessage(Twit::userRequestTwit($this->user()['id'],$cmd));
+          $data=Twit::userRequestTwit($this->user()['id'],$cmd);
+          if(is_array($data))
+              foreach ($data as $item)
+                  $this->SendMessage($item['hashtag'].PHP_EOL.$item['content']);
+              else
+                  $this->SendMessage($data);
+
           return false;
       }
             switch ($cmd) {

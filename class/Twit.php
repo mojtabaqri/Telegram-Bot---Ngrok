@@ -62,8 +62,7 @@ class Twit
     {
         try {
             $database = SleekDB::store('twit', $_ENV['dataDir']);
-            $database->where('hashtag','=',$hashtag)->where('invoke','=',false)->limit(1);
-            $database->update(['invoke'=>true]);
+            $database->where('hashtag','=',$hashtag)->where('invoke','=',false)->limit(1)->update(['invoke'=>true]);
             return $database->fetch();
         } catch (Exception $e) {
 
